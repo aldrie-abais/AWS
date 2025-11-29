@@ -3,98 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Basics</title>
+    <title>CineBook - Your Movie Experience</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>HTML Basics for Beginners</h1>
-    
-    <h2>Headings</h2>
-    <h3>This is a subheading</h3>
-    <h4>Smaller heading</h4>
-    
-    <h2>Paragraphs</h2>
-    <p>This is a paragraph. Paragraphs contain text content.</p>
-    <p>This is another paragraph with <strong>bold text</strong> and <em>italic text</em>.</p>
-    
-    <h2>Links</h2>
-    <a href="https://www.example.com">This is a link</a>
-    
-    <h2>Lists</h2>
-    <h3>Unordered List</h3>
-    <ul>
-        <li>First item</li>
-        <li>Second item</li>
-        <li>Third item</li>
-    </ul>
-    
-    <h3>Ordered List</h3>
-    <ol>
-        <li>Step one</li>
-        <li>Step two</li>
-        <li>Step three</li>
-    </ol>
-    
-    <h2>Form Elements</h2>
-    <form>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-        <br><br>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">CineBook</div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#movies">Movies</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="btn-primary">Sign In</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Experience Cinema Like Never Before</h1>
+            <p class="hero-subtitle">Book your favorite movies instantly with just a few clicks</p>
+            <div class="hero-buttons">
+                <button class="btn-primary btn-large">Book Now</button>
+                <button class="btn-secondary btn-large">Explore Movies</button>
+            </div>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <section class="features" id="movies">
+        <h2 class="section-title">Why Choose CineBook?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎬</div>
+                <h3>Latest Movies</h3>
+                <p>Access to the newest blockbusters and indie films</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💺</div>
+                <h3>Select Your Seat</h3>
+                <p>Choose your perfect seat with our interactive seating map</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Booking</h3>
+                <p>Quick and secure booking process in seconds</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎟️</div>
+                <h3>Digital Tickets</h3>
+                <p>Get your tickets delivered instantly to your phone</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="trending">
+        <h2 class="section-title">Now Showing</h2>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" onclick="scrollCarousel(-1)">‹</button>
+            <div class="movies-carousel" id="moviesCarousel">
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="poster-placeholder">MOVIE 1</div>
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Action Thriller</h3>
+                    <p class="movie-rating">⭐ 4.5/5</p>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="poster-placeholder">MOVIE 2</div>
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Sci-Fi Adventure</h3>
+                    <p class="movie-rating">⭐ 4.8/5</p>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="poster-placeholder">MOVIE 3</div>
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Romantic Drama</h3>
+                    <p class="movie-rating">⭐ 4.3/5</p>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="poster-placeholder">MOVIE 4</div>
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Comedy Special</h3>
+                    <p class="movie-rating">⭐ 4.6/5</p>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="poster-placeholder">MOVIE 5</div>
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Horror Mystery</h3>
+                    <p class="movie-rating">⭐ 4.7/5</p>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="poster-placeholder">MOVIE 6</div>
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Family Animation</h3>
+                    <p class="movie-rating">⭐ 4.9/5</p>
+                </div>
+            </div>
+            <button class="carousel-btn next" onclick="scrollCarousel(1)">›</button>
+        </div>
+    </section>
+
+    <script>
+        const carousel = document.getElementById('moviesCarousel');
+        const cards = carousel.querySelectorAll('.movie-card');
         
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-        <br><br>
+        function updateCarousel() {
+            const centerX = carousel.offsetWidth / 2;
+            
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenterX = rect.left + rect.width / 2 - carousel.getBoundingClientRect().left;
+                const distanceFromCenter = Math.abs(centerX - cardCenterX);
+                const maxDistance = carousel.offsetWidth / 2;
+                const scale = Math.max(0.7, 1 - (distanceFromCenter / maxDistance) * 0.3);
+                const opacity = Math.max(0.5, 1 - (distanceFromCenter / maxDistance) * 0.5);
+                
+                card.style.transform = `scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.transition = 'all 0.3s ease';
+            });
+        }
         
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <br><br>
+        function scrollCarousel(direction) {
+            const cardWidth = cards[0].offsetWidth + 32;
+            carousel.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
         
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" cols="30"></textarea>
-        <br><br>
-        
-        <input type="checkbox" id="subscribe" name="subscribe">
-        <label for="subscribe">Subscribe to newsletter</label>
-        <br><br>
-        
-        <input type="radio" id="option1" name="choice" value="option1">
-        <label for="option1">Option 1</label>
-        <input type="radio" id="option2" name="choice" value="option2">
-        <label for="option2">Option 2</label>
-        <br><br>
-        
-        <button type="submit">Submit Button</button>
-        <button type="button">Regular Button</button>
-        <button type="reset">Reset Button</button>
-    </form>
-    
-    <h2>Images</h2>
-    <img src="https://via.placeholder.com/150" alt="Placeholder image">
-    
-    <h2>Table</h2>
-    <table border="1">
-        <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-        </tr>
-        <tr>
-            <td>Row 1, Cell 1</td>
-            <td>Row 1, Cell 2</td>
-        </tr>
-        <tr>
-            <td>Row 2, Cell 1</td>
-            <td>Row 2, Cell 2</td>
-        </tr>
-    </table>
-    
-    <h2>Horizontal Line</h2>
-    <hr>
-    
-    <h2>Blockquote</h2>
-    <blockquote>This is a quoted text from another source.</blockquote>
-    
-    <h2>Div and Span</h2>
-    <div>This is a div element (block-level container)</div>
-    <p>This paragraph has a <span>span element</span> inside (inline container).</p>
-    
+        carousel.addEventListener('scroll', updateCarousel);
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
+    </script>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Book Your Next Movie?</h2>
+            <p>Join thousands of movie lovers enjoying seamless booking</p>
+            <button class="btn-primary btn-large">Get Started</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CineBook</h3>
+                <p>Your ultimate movie booking destination</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#movies">Movies</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: info@cinebook.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CineBook. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
