@@ -25,8 +25,8 @@
             <h1 class="hero-title">Experience Cinema Like Never Before</h1>
             <p class="hero-subtitle">Book your favorite movies instantly with just a few clicks</p>
             <div class="hero-buttons">
-                <button class="btn-primary btn-large">Book Now</button>
-                <button class="btn-secondary btn-large">Explore Movies</button>
+                <button class="btn-primary btn-large" onclick="window.location.href='book.html'">Book Now</button>
+                <button class="btn-secondary btn-large" onclick="window.location.href='#movies'">Explore Movies</button>
             </div>
         </div>
         <div class="hero-background"></div>
@@ -65,63 +65,80 @@
             <div class="movies-carousel" id="moviesCarousel">
                 <div class="movie-card">
                     <div class="movie-poster">
-                        <div class="poster-placeholder">MOVIE 1</div>
+                        <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&h=600&fit=crop" alt="Cyber Strike">
                         <div class="movie-overlay">
-                            <button class="btn-primary">Book Now</button>
+                            <button class="btn-primary btn-large" onclick="window.location.href='book.html'">Book Now</button>
                         </div>
                     </div>
-                    <h3>Action Thriller</h3>
+                    <h3>Cyber Strike</h3>
+                    <p class="movie-description">A cyber mercenary fights to save the world from an AI threat</p>
                     <p class="movie-rating">⭐ 4.5/5</p>
                 </div>
                 <div class="movie-card">
                     <div class="movie-poster">
-                        <div class="poster-placeholder">MOVIE 2</div>
+                        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=600&fit=crop" alt="Galaxy Warriors">
                         <div class="movie-overlay">
                             <button class="btn-primary">Book Now</button>
                         </div>
                     </div>
-                    <h3>Sci-Fi Adventure</h3>
+                    <h3>Galaxy Warriors</h3>
+                    <p class="movie-description">An epic space adventure across unknown galaxies</p>
                     <p class="movie-rating">⭐ 4.8/5</p>
                 </div>
                 <div class="movie-card">
                     <div class="movie-poster">
-                        <div class="poster-placeholder">MOVIE 3</div>
+                        <img src="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=400&h=600&fit=crop" alt="Eternal Love">
                         <div class="movie-overlay">
                             <button class="btn-primary">Book Now</button>
                         </div>
                     </div>
-                    <h3>Romantic Drama</h3>
+                    <h3>Eternal Love</h3>
+                    <p class="movie-description">A timeless romance that defies all odds</p>
                     <p class="movie-rating">⭐ 4.3/5</p>
                 </div>
                 <div class="movie-card">
                     <div class="movie-poster">
-                        <div class="poster-placeholder">MOVIE 4</div>
+                        <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=600&fit=crop" alt="Laugh Out Loud">
                         <div class="movie-overlay">
                             <button class="btn-primary">Book Now</button>
                         </div>
                     </div>
-                    <h3>Comedy Special</h3>
+                    <h3>Laugh Out Loud</h3>
+                    <p class="movie-description">The funniest comedy of the year with non-stop laughs</p>
                     <p class="movie-rating">⭐ 4.6/5</p>
                 </div>
                 <div class="movie-card">
                     <div class="movie-poster">
-                        <div class="poster-placeholder">MOVIE 5</div>
+                        <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=400&h=600&fit=crop" alt="Dark Shadows">
                         <div class="movie-overlay">
                             <button class="btn-primary">Book Now</button>
                         </div>
                     </div>
-                    <h3>Horror Mystery</h3>
+                    <h3>Dark Shadows</h3>
+                    <p class="movie-description">A chilling horror mystery that will keep you on edge</p>
                     <p class="movie-rating">⭐ 4.7/5</p>
                 </div>
                 <div class="movie-card">
                     <div class="movie-poster">
-                        <div class="poster-placeholder">MOVIE 6</div>
+                        <img src="https://images.unsplash.com/photo-1608889476561-6242cfdbf622?w=400&h=600&fit=crop" alt="Magic Kingdom">
                         <div class="movie-overlay">
                             <button class="btn-primary">Book Now</button>
                         </div>
                     </div>
-                    <h3>Family Animation</h3>
+                    <h3>Magic Kingdom</h3>
+                    <p class="movie-description">An enchanting animated adventure for the whole family</p>
                     <p class="movie-rating">⭐ 4.9/5</p>
+                </div>
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop" alt="Speed Demon">
+                        <div class="movie-overlay">
+                            <button class="btn-primary">Book Now</button>
+                        </div>
+                    </div>
+                    <h3>Speed Demon</h3>
+                    <p class="movie-description">High-octane racing action with heart-pounding stunts</p>
+                    <p class="movie-rating">⭐ 4.4/5</p>
                 </div>
             </div>
             <button class="carousel-btn next" onclick="scrollCarousel(1)">›</button>
@@ -131,6 +148,71 @@
     <script>
         const carousel = document.getElementById('moviesCarousel');
         const cards = carousel.querySelectorAll('.movie-card');
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+        let currentIndex = 0;
+
+        carousel.addEventListener('mousedown', dragStart);
+        carousel.addEventListener('touchstart', dragStart);
+        carousel.addEventListener('mouseup', dragEnd);
+        carousel.addEventListener('touchend', dragEnd);
+        carousel.addEventListener('mousemove', drag);
+        carousel.addEventListener('touchmove', drag);
+        carousel.addEventListener('mouseleave', dragEnd);
+        
+        function dragStart(e) {
+            isDragging = true;
+            startPos = getPositionX(e);
+            animationID = requestAnimationFrame(animation);
+            carousel.style.cursor = 'grabbing';
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                const currentPosition = getPositionX(e);
+                currentTranslate = prevTranslate + currentPosition - startPos;
+            }
+        }
+
+        function dragEnd() {
+            isDragging = false;
+            cancelAnimationFrame(animationID);
+            
+            const movedBy = currentTranslate - prevTranslate;
+            
+            if (movedBy < -50 && currentIndex < cards.length - 1) currentIndex += 1;
+            if (movedBy > 50 && currentIndex > 0) currentIndex -= 1;
+            
+            setPositionByIndex();
+            carousel.style.cursor = 'grab';
+        }
+
+        function getPositionX(e) {
+            return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        }
+
+        function animation() {
+            setCarouselPosition();
+            if (isDragging) requestAnimationFrame(animation);
+        }
+
+        function setCarouselPosition() {
+            carousel.scrollLeft = -currentTranslate;
+            updateCarousel();
+        }
+
+        function setPositionByIndex() {
+            const cardWidth = cards[0].offsetWidth + 32;
+            currentTranslate = currentIndex * -cardWidth;
+            prevTranslate = currentTranslate;
+            carousel.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: 'smooth'
+            });
+        }
         
         function updateCarousel() {
             const centerX = carousel.offsetWidth / 2;
@@ -145,7 +227,7 @@
                 
                 card.style.transform = `scale(${scale})`;
                 card.style.opacity = opacity;
-                card.style.transition = 'all 0.3s ease';
+                card.style.transition = isDragging ? 'none' : 'all 0.3s ease';
             });
         }
         
@@ -155,10 +237,12 @@
                 left: direction * cardWidth,
                 behavior: 'smooth'
             });
+            setTimeout(updateCarousel, 50);
         }
         
         carousel.addEventListener('scroll', updateCarousel);
         window.addEventListener('resize', updateCarousel);
+        carousel.style.cursor = 'grab';
         updateCarousel();
     </script>
 
